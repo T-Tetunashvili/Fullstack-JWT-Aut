@@ -1,7 +1,15 @@
+import { Routes, Route } from "react-router-dom"
+import SignUp from "./pages/signup/SignUp"
+import SignIn from "./pages/signin/SignIn"
 
 const App = () => {
   return (
-    <div>App</div>
+    <>
+      <Routes>
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/sign-in" element={<SignIn />} />
+      </Routes>
+    </>
   )
 }
 
