@@ -1,0 +1,25 @@
+{
+   "name": "fullstack-jwt-auth",
+   "version": "1.0.0",
+   "description": "> Fullstack authorization system build on react and express.js\r > note: Key concepts Json Web Token, handle front request with express! 💻",
+   "main": "index.js",
+   "scripts": {
+      "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+      "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/T-Tetunashvili/Fullstack-JWT-Aut.git"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "type": "commonjs",
+   "bugs": {
+      "url": "https://github.com/T-Tetunashvili/Fullstack-JWT-Aut/issues"
+   },
+   "homepage": "https://github.com/T-Tetunashvili/Fullstack-JWT-Aut#readme",
+   "devDependencies": {
+      "concurrently": "^9.2.1"
+   }
+}
