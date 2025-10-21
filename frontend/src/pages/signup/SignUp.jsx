@@ -1,8 +1,29 @@
 import styles from "./SignUp.module.css"
 import Input from "../../components/Input"
 import { Link } from "react-router-dom"
+import { useContext } from "react"
+import { AppContext } from "../../context/AppContext"
 
 const SignUp = () => {
+
+   const {
+      signUpData: {
+         fullName, setFullName,
+         email, setEmail,
+         password, setPassword,
+         confirmPassword, setConfirmPassword,
+         isChecked, setIsChecked,
+         signUpMutation
+      }
+   } = useContext(AppContext)
+
+   const handleSubmit = (e) => {
+      e.preventDefault()
+
+      // send user data to the server (req.body can access it)
+      signUpMutation.mutate({ fullName, email, password, confirmPassword, isChecked })
+   }
+
    return (
       <div className={styles.bg}>
          <div className={styles.card}>
@@ -28,27 +49,64 @@ const SignUp = () => {
                <p className={styles.subtitle}>Fast, secure sign up — join us today.</p>
             </header>
 
-            <form className={styles.form} action="#" method="post" noValidate>
+            <form className={styles.form} onSubmit={handleSubmit} method="post" noValidate>
                <div className={styles.row}>
-                  <Input text="Full Name" id="name" type="text" placeholder="you@example.com" className={styles.input} />
+                  <Input
+                     text="Full Name"
+                     id="name"
+                     type="text"
+                     placeholder="you@example.com"
+                     className={styles.input}
+                     onchange={(e) => setFullName(e.target.value)}
+                     value={fullName}
+                  />
                </div>
 
                <div className={styles.row}>
-                  <Input text="Email" id="email" type="email" placeholder="you@example.com" className={styles.input} />
+                  <Input
+                     text="Email"
+                     id="email"
+                     type="email"
+                     placeholder="you@example.com"
+                     className={styles.input}
+                     onchange={(e) => setEmail(e.target.value)}
+                     value={email}
+                  />
                </div>
 
                <div className={styles.rowSplit}>
                   <div className={styles.rowHalf}>
-                     <Input text="Password" id="password" type="password" placeholder="••••••••" className={styles.input} />
+                     <Input
+                        text="Password"
+                        id="password"
+                        type="password"
+                        placeholder="••••••••"
+                        className={styles.input}
+                        onchange={(e) => setPassword(e.target.value)}
+                        value={password}
+                     />
                   </div>
                   <div className={styles.rowHalf}>
-                     <Input text="Confirm" id="confirm" type="password" placeholder="••••••••" className={styles.input} />
+                     <Input
+                        text="Confirm"
+                        id="confirm"
+                        type="password"
+                        placeholder="••••••••"
+                        className={styles.input}
+                        onchange={(e) => setConfirmPassword(e.target.value)}
+                        value={confirmPassword}
+                     />
                   </div>
                </div>
 
                <div className={styles.actions}>
                   <label className={styles.checkbox}>
-                     <input type="checkbox" name="terms" />
+                     <input
+                        type="checkbox"
+                        name="terms"
+                        onChange={(e) => setIsChecked(e.target.checked)}
+                        value={isChecked}
+                     />
                      <span>I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a></span>
                   </label>
                   <button type="submit" className={styles.primary}>Create account</button>

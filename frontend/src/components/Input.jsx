@@ -1,5 +1,5 @@
 
-const Input = ({ text, id, type, placeholder, className }) => {
+const Input = ({ text, id, type, placeholder, className, onchange, value }) => {
    return (
       <>
          <label htmlFor={id}>{text}</label>
@@ -10,6 +10,8 @@ const Input = ({ text, id, type, placeholder, className }) => {
             placeholder={placeholder}
             required
             className={className}
+            onChange={onchange}
+            value={value}
          />
       </>
    )
