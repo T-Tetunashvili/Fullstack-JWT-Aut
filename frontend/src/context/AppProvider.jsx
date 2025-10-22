@@ -9,12 +9,20 @@ const AppProvider = ({ children }) => {
    const navigate = useNavigate()
 
    // -------------------- STATE --------------------
+   // sign up states
    const [fullName, setFullName] = useState("")
    const [email, setEmail] = useState("")
    const [password, setPassword] = useState("")
    const [confirmPassword, setConfirmPassword] = useState("")
    const [isChecked, setIsChecked] = useState(false)
    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+   // sign in states
+   const [authEmail, setAuthEmail] = useState("")
+   const [authPassword, setAuthPassword] = useState("")
+   const [rememberChecked, setRememberChecked] = useState(false)
+   // display name when user will be logged in
+   const [name, setName] = useState("")
 
    // -------------------- RESTORE SESSION ON REFRESH --------------------
    useEffect(() => {
@@ -23,6 +31,7 @@ const AppProvider = ({ children }) => {
       if (savedUser) {
          const user = JSON.parse(savedUser)
          setFullName(user.fullName)
+         setName(user.name)
          setIsLoggedIn(true)
       }
    })
@@ -36,10 +45,10 @@ const AppProvider = ({ children }) => {
          return res.data
       },
       onSuccess: (data) => {
-         console.log("User", data.success, "signed up successfully!")
+         window.alert(`User ${data.success} signed up successfully!`)
 
          // Save user data to localStorage so it's remembered
-         localStorage.setItem("user", JSON.stringify({ fullName, email }))
+         localStorage.setItem("user", JSON.stringify({ fullName }))
 
          setIsLoggedIn(true)
 
@@ -47,8 +56,36 @@ const AppProvider = ({ children }) => {
       },
       onError: (error) => {
          if (error.response) {
-            console.log("Status code:", error.response.status)
-            console.log("Server responded with an error:", error.response.data.message)
+            window.alert(`Status: ${error.response.status}; ${error.response.data.message}`)
+         } else {
+            console.log(`Error setting up request: ${error.message}`)
+         }
+      }
+   })
+
+   // -------------------- SIGN IN MUTATION --------------------
+   const signInMutation = useMutation({
+      mutationFn: async (authUserData) => {
+         const res = await axios.post("http://localhost:3500/signin", authUserData, {
+            headers: { "Content-Type": "application/json" }
+         })
+         return res.data
+      },
+      onSuccess: (data) => {
+         window.alert(`User ${data.success} logged in successfully!`)
+
+         const name = data.success
+
+         // Save user data to localstorage so it's remembered
+         localStorage.setItem("user", JSON.stringify({ name }))
+
+         setIsLoggedIn(true)
+
+         navigate("/")
+      },
+      onError: (error) => {
+         if (error.response) {
+            window.alert(`Status: ${error.response.status}; ${error.response.data.message}`)
          } else {
             console.log(`Error setting up request: ${error.message}`)
          }
@@ -64,6 +101,9 @@ const AppProvider = ({ children }) => {
       setEmail("")
       setPassword("")
       setConfirmPassword("")
+      // restart the state for sign in data
+      setAuthEmail("")
+      setAuthPassword("")
 
       // remove and navigate
       localStorage.removeItem("user")
@@ -82,7 +122,13 @@ const AppProvider = ({ children }) => {
          isLoggedIn,
          handleLogOut
       },
-      signInData: {}
+      signInData: {
+         authEmail, setAuthEmail,
+         authPassword, setAuthPassword,
+         rememberChecked, setRememberChecked,
+         signInMutation,
+         name
+      }
    }
 
    // -------------------- PROVIDER --------------------

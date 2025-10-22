@@ -5,7 +5,14 @@ import { AppContext } from "../../context/AppContext"
 
 const Home = () => {
 
-   const { signUpData: { isLoggedIn, fullName, handleLogOut } } = useContext(AppContext)
+   const {
+      signUpData: {
+         isLoggedIn, fullName, handleLogOut
+      },
+      signInData: {
+         name
+      }
+   } = useContext(AppContext)
 
    return (
       <>
@@ -13,7 +20,7 @@ const Home = () => {
             <div className={styles.bg}>
                <div className={styles.container}>
                   <h1 className={styles.welcome}>Welcome
-                     <span className={styles.name}>{fullName}</span>
+                     <span className={styles.name}>{fullName}{name}</span>
                   </h1>
                   <div className={styles.logoutWrap}>
                      <button

@@ -11,7 +11,7 @@ const handleSignUp = async (req, res) => {
    const { fullName, email, password, confirmPassword, isChecked } = req.body
 
    if (!fullName || !email || !password || !confirmPassword || !isChecked) {
-      return res.status(400).json({ message: "all the inputs are required! check the checkbox!" })
+      return res.status(400).json({ message: "Fill the data! Check the checkbox!" })
    }
 
    // check if same fullname exists 
@@ -27,7 +27,7 @@ const handleSignUp = async (req, res) => {
       return user.email === email
    })
 
-   if (duplicate) return res.status(409).json({ message: "this email already exists!" })
+   if (duplicate) return res.status(409).json({ message: "This email already exists!" })
 
    // check if passwords match
    if (password !== confirmPassword) {

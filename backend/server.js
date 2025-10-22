@@ -9,6 +9,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use("/signup", require("./routes/signUp"))
+app.use("/signin", require("./routes/auth"))
 
 app.use((err, req, res, next) => {
    console.error(err)
