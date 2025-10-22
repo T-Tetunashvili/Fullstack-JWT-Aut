@@ -8,8 +8,11 @@ const PORT = process.env.PORT || 3500
 app.use(cors())
 app.use(express.json())
 
-app.post("/signup", (req, res) => {
-   console.log(req.body)
+app.use("/signup", require("./routes/signUp"))
+
+app.use((err, req, res, next) => {
+   console.error(err)
+   res.status(500).send(err.message)
 })
 
 app.listen(PORT, () => console.log(`server is running on port: ${PORT}`))

@@ -1,1 +1,20 @@
-[]
+[
+   {
+      "fullname": "Tazo Tetunashvili",
+      "email": "tetunashvilinino@gmail.com",
+      "password": "$2b$10$F3PIc/9xZ9oMNxZh/HijAu.1SnfbFDFIt3Fw7od1K8Y.6e5pmnw0K",
+      "confirmPassword": "123"
+   },
+   {
+      "fullname": "Nino Tetunashvili",
+      "email": "tetunashvilitazo@gmail.com",
+      "password": "$2b$10$3Q/kVh2ESSDUJ0iSYTyE4.MNziakiz1p1Hfr8ZyvxwEqR.EjfdhXq",
+      "confirmPassword": "123"
+   },
+   {
+      "fullname": "Vaja Tetunashvili",
+      "email": "vaja@gmail.com",
+      "password": "$2b$10$mZNDhBnrTUBJE1JcnWF.led407WPGA6.t9SB1c7ddMPRiyVwrnJQO",
+      "confirmPassword": "123"
+   }
+]
