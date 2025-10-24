@@ -16,6 +16,7 @@ const AppProvider = ({ children }) => {
    const [confirmPassword, setConfirmPassword] = useState("")
    const [isChecked, setIsChecked] = useState(false)
    const [isLoggedIn, setIsLoggedIn] = useState(false)
+   const [isSignedIn, setIsSignedIn] = useState(false)
 
    // sign in states
    const [authEmail, setAuthEmail] = useState("")
@@ -24,17 +25,20 @@ const AppProvider = ({ children }) => {
    // display name when user will be logged in
    const [name, setName] = useState("")
 
+   // store accessToken in memory
+   const [storeAccessToken, setStoreAccessToken] = useState()
+
    // -------------------- RESTORE SESSION ON REFRESH --------------------
    useEffect(() => {
       const savedUser = localStorage.getItem("user")
 
       if (savedUser) {
          const user = JSON.parse(savedUser)
-         setFullName(user.fullName)
+         setFullName(user.fullName ? user.fullName : fullName)
          setName(user.name)
          setIsLoggedIn(true)
       }
-   })
+   }, [name, isLoggedIn])
 
    // -------------------- SIGN UP MUTATION --------------------
    const signUpMutation = useMutation({
@@ -50,7 +54,7 @@ const AppProvider = ({ children }) => {
          // Save user data to localStorage so it's remembered
          localStorage.setItem("user", JSON.stringify({ fullName }))
 
-         setIsLoggedIn(true)
+         setIsSignedIn(true)
 
          navigate("/")
       },
@@ -67,14 +71,18 @@ const AppProvider = ({ children }) => {
    const signInMutation = useMutation({
       mutationFn: async (authUserData) => {
          const res = await axios.post("http://localhost:3500/signin", authUserData, {
-            headers: { "Content-Type": "application/json" }
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true
          })
+
          return res.data
       },
       onSuccess: (data) => {
          window.alert(`User ${data.success} logged in successfully!`)
 
          const name = data.success
+
+         setStoreAccessToken(data.accessToken)
 
          // Save user data to localstorage so it's remembered
          localStorage.setItem("user", JSON.stringify({ name }))
@@ -95,6 +103,7 @@ const AppProvider = ({ children }) => {
    // -------------------- LOG OUT --------------------
    const handleLogOut = () => {
       setIsLoggedIn(false)
+      setIsSignedIn(false)
 
       // restart the states
       setFullName("")
@@ -119,7 +128,7 @@ const AppProvider = ({ children }) => {
          confirmPassword, setConfirmPassword,
          isChecked, setIsChecked,
          signUpMutation,
-         isLoggedIn,
+         isLoggedIn, setIsLoggedIn,
          handleLogOut
       },
       signInData: {
@@ -127,7 +136,9 @@ const AppProvider = ({ children }) => {
          authPassword, setAuthPassword,
          rememberChecked, setRememberChecked,
          signInMutation,
-         name
+         name,
+         storeAccessToken,
+         isSignedIn
       }
    }
 

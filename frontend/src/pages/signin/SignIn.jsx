@@ -37,7 +37,7 @@ const SignIn = () => {
                   type="email"
                   placeholder="you@example.com"
                   className={styles.input}
-                  onchange={(e) => setAuthEmail(e.target.value)}
+                  onChange={(e) => setAuthEmail(e.target.value)}
                   value={authEmail}
                />
                <Input
@@ -46,7 +46,7 @@ const SignIn = () => {
                   type="password"
                   placeholder="••••••••"
                   className={styles.input}
-                  onchange={(e) => setAuthPassword(e.target.value)}
+                  onChange={(e) => setAuthPassword(e.target.value)}
                   value={authPassword}
                />
 

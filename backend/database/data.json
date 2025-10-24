@@ -2,13 +2,8 @@
    {
       "fullname": "Tazo Tetunashvili",
       "email": "tetunashvilitazo@gmail.com",
-      "password": "$2b$10$SqH5zrwdwR3wEWpkCodf/OYr9EmrTF7.FCnsOaYmZbobZwxpPSb3y",
-      "confirmPassword": "tazo123$$"
-   },
-   {
-      "fullname": "Nino Tetunashvili",
-      "email": "tetunashvilinino@gmail.com",
-      "password": "$2b$10$p9Io5B1NRwkIN2FTEIe.IeCl1qGRJxSeP00M6vUg4SxdgQNNihjkG",
-      "confirmPassword": "nino123$$"
+      "password": "$2b$10$z49Rpb.UDzcndWcjLFno9OAkiONiDM5ICcRWj3WCePtnjSHVhzLBm",
+      "confirmPassword": "tazo123$$",
+      "refreshToken": ""
    }
 ]

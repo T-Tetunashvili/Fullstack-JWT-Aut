@@ -57,7 +57,7 @@ const SignUp = () => {
                      type="text"
                      placeholder="you@example.com"
                      className={styles.input}
-                     onchange={(e) => setFullName(e.target.value)}
+                     onChange={(e) => setFullName(e.target.value)}
                      value={fullName}
                   />
                </div>
@@ -69,7 +69,7 @@ const SignUp = () => {
                      type="email"
                      placeholder="you@example.com"
                      className={styles.input}
-                     onchange={(e) => setEmail(e.target.value)}
+                     onChange={(e) => setEmail(e.target.value)}
                      value={email}
                   />
                </div>
@@ -82,7 +82,7 @@ const SignUp = () => {
                         type="password"
                         placeholder="••••••••"
                         className={styles.input}
-                        onchange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(e.target.value)}
                         value={password}
                      />
                   </div>
@@ -93,7 +93,7 @@ const SignUp = () => {
                         type="password"
                         placeholder="••••••••"
                         className={styles.input}
-                        onchange={(e) => setConfirmPassword(e.target.value)}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                         value={confirmPassword}
                      />
                   </div>
